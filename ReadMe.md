@@ -1,12 +1,14 @@
 #### # Get source and checkout:
-```
-git clone https://git.openwrt.org/openwrt/openwrt.git
-git fetch --tags
-git tag -l
-git checkout v19.07.1
-make prereq
-git pull
-```
+
+`git clone https://github.com/openwrt/openwrt.git -b openwrt-19.07`   
+`git checkout openwrt-19.07`   
+
+`git fetch --tags` 
+`git tag -l` 
+`git checkout v19.07.2` 
+`make prereq` 
+`git pull` 
+
   
 #### # Get configuration from release build:  
 ```
@@ -21,13 +23,23 @@ GL-MT300n-V2: https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt76
 ./scripts/feeds update $REPO
 
 ./scripts/feeds install -a
-./scripts/feeds install $REPO
-./scripts/feeds install -p $PKG
+./scripts/feeds install -p $PACKAGE
 ```
 
-#### # Build package:
+#### # Build firmware:
 ```
-PKG="<PACKAGE>"
+make menuconfig
+make download -j8
+make -j8 V=s 2>&1 | tee build.log
+```
+
+Clean: `make clean`  
+Dirclean: `make dirclean`  
+Distclean: `make distclean`  
+  
+#### # Build package:   
+```
+PACKAGE="<PACKAGE>"
 echo ${PACKAGE}
 
 make package/${PACKAGE}/download V=s
@@ -36,17 +48,7 @@ make package/${PACKAGE}/compile V=s
 make package/${PACKAGE}/install V=s
 make package/${PACKAGE}/{clean,compile,install} V=s
 ```
-
-#### # Build firmware:
-```
-make menuconfig
-make download
-make V=s 2>&1 | tee build.log
-```
-
-Clean: `make clean`  
-Dirclean: `make dirclean`  
-Distclean: `make distclean`  
+  
   
 #### # Test builds in qemu:
 ```

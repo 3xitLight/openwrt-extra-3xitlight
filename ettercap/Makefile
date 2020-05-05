@@ -4,9 +4,11 @@ PKG_NAME:=ettercap
 PKG_VERSION:=0.8.3
 PKG_RELEASE:=1
 PKG_MAINTAINER:=3XITLIGHT <3xitlight@gmail.com>
+PKG_LICENSE:=GPL-3.0-or-later
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/Ettercap/ettercap/releases/download/v$(PKG_VERSION)/
 PKG_HASH:=0a5caa838928467619aacaa0009e46567b8c87314e89dd724b5ddfd948bc42e3
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/ettercap

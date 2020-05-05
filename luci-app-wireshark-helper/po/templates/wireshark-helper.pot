@@ -1,0 +1,84 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:35
+msgid "%s (disabled)"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:19
+msgid "%s is not installed or not found"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:56
+msgid "Configuration"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/view/wireshark-helper/buttons.htm:57
+msgid "Disable"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/view/wireshark-helper/buttons.htm:54
+msgid "Enable"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:83
+msgid "IP to Monitor"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:66
+msgid "Interface to Listen on"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/view/wireshark-helper/js.htm:51
+msgid "Loading"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/view/wireshark-helper/buttons.htm:44
+msgid "Restart"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:51
+msgid ""
+"Run a Wireshark app on the %s device and set Wireshark filter to: (ip.src == "
+"%s) || (ip.dst == %s)"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:31
+msgid "Running"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:54
+msgid "See the %sREADME%s for details."
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:41
+msgid "Service Status"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:40
+msgid "Service Status [%s %s]"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/view/wireshark-helper/buttons.htm:41
+msgid "Start"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/view/wireshark-helper/buttons.htm:47
+msgid "Stop"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:33
+msgid "Stopped"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/controller/wireshark-helper.lua:4
+msgid "Wireshark Helper"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:39
+msgid "Wireshark Helper Settings"
+msgstr ""
+
+#: applications/luci-app-wireshark-helper/luasrc/model/cbi/wireshark-helper.lua:79
+msgid "Wireshark IP"
+msgstr ""

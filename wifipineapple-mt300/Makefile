@@ -8,16 +8,14 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/wifipineapple-mt300
 PKG_SOURCE:=wifipineapple-mt300.tar.gz
 PKG_SOURCE_URL:=https://github.com/3xitLight/share/releases/download/1/
 
-include $(INCLUDE_DIR)/package.mk
-
 define Package/wifipineapple-mt300
-    SECTION:=3xitlight
-    CATEGORY:=3xitlight
-    TITLE:=wifipineapple-mt300
-	DEPENDS:=+bash +netcat php7-cgi +php7-fpm +dnsmasq +nginx
-
+	SECTION:=3xitlight
+	CATEGORY:=3xitlight
+	TITLE:=wifipineapple-mt300
+	DEPENDS:=+bash +netcat php7-cgi +php7-fpm +dnsmasq +nginx +openssh
 endef
 
+include $(INCLUDE_DIR)/package.mk
 
 define Build/Compile
         true
