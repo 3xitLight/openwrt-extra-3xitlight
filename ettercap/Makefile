@@ -3,7 +3,7 @@
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
-#
+# libpcap libnet libpthread zlib curl libbsd libltdl libpcre ncurses libbsd libcurl4 libluajit libncurses  libpcap libpcre 
 
 include $(TOPDIR)/rules.mk
 
@@ -15,8 +15,7 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/Ettercap/ettercap/releases/download/v$(PKG_VERSION)/
 PKG_HASH:=0a5caa838928467619aacaa0009e46567b8c87314e89dd724b5ddfd948bc42e3
 PKG_LICENSE:=GPL-3.0
-CMAKE_OPTIONS:=-D ENABLE_GTK=Off -D INSTALL_DESKTOP=Off -D ENABLE_LUA=Off -D ENABLE_TESTS=Off -D ENABLE_GEOIP=Off -D ENABLE_PDF_DOCS=Off
-# DEPENDS:=+libc +libstdcpp +uclibcxx +libgcc +uclibcxx +libpcre +libncurses +libpcrecpp +libssp +libltdl +libbsd +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl +libcurl
+CMAKE_OPTIONS:=-DENABLE_GTK=Off -DINSTALL_DESKTOP=Off -DENABLE_LUA=Off -DENABLE_TESTS=Off -DENABLE_GEOIP=Off -DENABLE_PDF_DOCS=Off -DCMAKE_INSTALL_PREFIX=/usr
 
 include $(INCLUDE_DIR)/package.mk
 # include $(INCLUDE_DIR)/cmake.mk
@@ -27,7 +26,7 @@ define Package/ettercap
   TITLE:=a suite for man in the middle attacks.
   URL:=https://www.ettercap-project.org
   MAINTAINER:=3xitlight <3xitlight@gmail.com>
-  DEPENDS:=+libc +libstdcpp +uclibcxx +libgcc +uclibcxx +libpcre +libncurses +libpcrecpp +libssp +libltdl +libbsd +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl +libcurl
+  DEPENDS:=+libc +libstdcpp +uclibcxx +libgcc +uclibcxx +libpcre +libncurses +libpcrecpp +libltdl +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl +libcurl
 endef
 
 define Build/Prepare
@@ -66,11 +65,7 @@ endef
 
 define Package/ettercap/install
 	$(INSTALL_DIR) $(1)/usr/bin
-# $(CP) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/ettercap $(1)/usr/bin/ettercap
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/libettercap.so.0.8.2 $(1)/usr/bin/libettercap.so
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/libettercap.so.0.8.2 $(1)/usr/bin/libettercap.so.0
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/libettercap.so.0.8.2 $(1)/usr/bin/libettercap.so.0.8.2
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/utils/etterfilter $(1)/usr/bin/etterfilter
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/utils/etterlog $(1)/usr/bin/etterlog
 	$(INSTALL_DIR) $(1)/etc/ettercap
@@ -79,9 +74,13 @@ define Package/ettercap/install
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/build/share/etter.mdns $(1)/etc/ettercap/etter.mdns
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/build/share/etter.nbns $(1)/etc/ettercap/etter.nbns
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/interfaces/libettercap-ui.so.0.8.2 $(1)/usr/lib/libettercap-ui.so
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/interfaces/libettercap-ui.so.0.8.2 $(1)/usr/lib/libettercap-ui.so.0
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/libettercap.so $(1)/usr/lib/libettercap.so
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/libettercap.so.0 $(1)/usr/lib/libettercap.so.0
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/libettercap.so.0.8.2 $(1)/usr/lib/libettercap.so.0.8.2
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/interfaces/libettercap-ui.so $(1)/usr/lib/libettercap-ui.so
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/interfaces/libettercap-ui.so.0 $(1)/usr/lib/libettercap-ui.so.0
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/interfaces/libettercap-ui.so.0.8.2 $(1)/usr/lib/libettercap-ui.so.0.8.2
+	$(LN) /usr/lib/libpcap.so. $(1)/usr/lib/libpcap.so.1
 	$(INSTALL_DIR) $(1)/usr/share/ettercap
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/build/share/etterlog.dtd $(1)/usr/share/ettercap/etterlog.dtd
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/build/share/etter.fields $(1)/usr/share/ettercap/etter.fields
