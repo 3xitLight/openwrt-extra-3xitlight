@@ -3,5 +3,4 @@ src-git luci https://git.openwrt.org/project/luci.git^13dd17fca148965d38f0d4e578
 src-git routing https://git.openwrt.org/feed/routing.git^efa6e5445adda9c6545f551808829ec927cbade8
 src-git telephony https://git.openwrt.org/feed/telephony.git^6f95d6ab3f359ee2ce81c20522700937424d1591
 src-link 3xitlight /home/xnn/Desktop/dev/openwrtbuild/customfeeds/3xitlight
-src-git openwrt_extra https://github.com/Andy2244/openwrt-extra
 src-git openwrt_node_packages https://github.com/nxhack/openwrt-node-packages.git

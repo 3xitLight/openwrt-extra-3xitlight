@@ -1,5 +1,3 @@
-# This is free software, licensed under the GNU General Public License v3.
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ettercap
@@ -7,20 +5,21 @@ PKG_VERSION:=0.8.3
 PKG_RELEASE:=1
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_MAINTAINER:=3XITLiGHT <3xitlight@gmail.com>
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+
 PKG_SOURCE_URL:=https://github.com/Ettercap/ettercap/releases/download/v$(PKG_VERSION)/
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_HASH:=0a5caa838928467619aacaa0009e46567b8c87314e89dd724b5ddfd948bc42e3
+PKGARCH:=all
+CMAKE_OPTIONS:=-D ENABLE_GTK=Off -D INSTALL_DESKTOP=Off -D ENABLE_LUA=Off -D ENABLE_TESTS=Off -D ENABLE_GEOIP=Off -D ENABLE_PDF_DOCS=Off
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/ettercap
-    SECTION:=3xitlight
-    CATEGORY:=3xitlight
-    TITLE:=A suite for man in the middle attacks.
-    PKGARCH:=all
-    DEPENDS:=+libc +libstdcpp +uclibcxx +libgcc +terminfo +uclibcxx +libpcre2 +luajit +ca-bundle +ca-certificates +libpcre +libncurses +libncurses-dev +libpcrecpp +libssp +libltdl +libbsd +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl +libcurl +libmbedtls
-    CMAKE_OPTIONS:=-D ENABLE_GTK=Off -D INSTALL_DESKTOP=Off -D ENABLE_LUA=Off -D ENABLE_TESTS=Off -D ENABLE_GEOIP=Off -D ENABLE_PDF_DOCS=Off
-    #-D BUNDLED_LIBS=Off -D SYSTEM_LIBS=Off
+  SECTION:=3xitlight
+  CATEGORY:=3xitlight
+  TITLE:=a suite for man in the middle attacks.
+  URL:=https://www.ettercap-project.org
+  DEPENDS:=+libc +libstdcpp +uclibcxx +libgcc +uclibcxx +libpcre +libncurses +libpcrecpp +libssp +libltdl +libbsd +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl
 endef
 
 define Package/ettercap/description

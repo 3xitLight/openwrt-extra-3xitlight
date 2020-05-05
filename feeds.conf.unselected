@@ -2,3 +2,4 @@ src-git node-red https://github.com/dceejay/openwrt-node-red.git
 src-git openwrt-useful-tools https://github.com/adde88/openwrt-useful-tools.git
 src-git stangri https://github.com/stangri/openwrt-repo.git
 src-git hcxtools https://github.com/adde88/hcxtools-hcxdumptool-openwrt.git
+src-git openwrt_extra https://github.com/Andy2244/openwrt-extra
