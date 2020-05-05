@@ -1,4 +1,4 @@
-#### [get source and checkout]
+#### # Get source and checkout
 ```
 ###  get source and checkout  
 '''  
@@ -19,7 +19,7 @@ git pull
 #### [GL-MT300n-V2]
 `https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt76x8/config.buildinfo -O .config`
 
-#### [update & install packages]
+#### # Update & install packages
 ```
 ./scripts/feeds update -a
 ./scripts/feeds update $REPO
@@ -29,7 +29,7 @@ git pull
 ./scripts/feeds install -p $PKG
 ```
 
-#### [build package]
+#### # Build package
 ```
 PKG="<PACKAGE>"
 echo ${PACKAGE}
@@ -41,7 +41,7 @@ make package/${PACKAGE}/install V=s
 make package/${PACKAGE}/{clean,compile,install} V=s
 ```
 
-#### [build firmware]
+#### # Build firmware
 ```
 make menuconfig
 make download
@@ -52,13 +52,24 @@ Clean: `make clean`
 Dirclean: `make dirclean`  
 Distclean: `make distclean`  
 
-#### [test builds in qemu]
+#### # Test builds in qemu
 ```
 ./scripts/feeds install -p extra qemu-userspace
 make package/qemu-userspace/host/compile -j8
 ```
 
-#### [build info]
+Test build samba binary for default target:
+
+```
+./staging_dir/hostpkg/bin/qemu-mips -L staging_dir/target-mips_24kc_musl/root-ath79/ staging_dir/target-mips_24kc_musl/root-ath79/usr/sbin/smbd -V
+```
+
+As you can see i hand the staging root as our qemu base root-fs path.
+
+This way i can do a basic check if the build binary can find/use all its shared libs and if i build the correct version or check other simple command-line parameters. I use this so i don't have to verify/test always via my live devices on rather trivial changes/updates.
+This is also faster/simpler than setting up a full qemu system for openWrt.
+
+#### # Build info
 Here is what happens via make:
 
 1. default make build/install into ../build_dir/target-(arch)/(packagename)/ipkg-install
