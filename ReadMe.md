@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 #### [get source and checkout]
 ```
-=======
 ###  get source and checkout  
 '''  
 >>>>>>> 203c64f99595fee7576078924f279ea9928ec18e
@@ -92,7 +90,6 @@ make menuconfig
 make download 
 make V=s 2>&1 | tee build.log 
 '''
->>>>>>> 203c64f99595fee7576078924f279ea9928ec18e
 
 #### [test builds in qemu]
 ```
