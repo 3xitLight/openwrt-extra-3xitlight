@@ -7,11 +7,13 @@ git checkout v19.07.1
 make prereq
 git pull
 ```
-#### # Get configuration from release build:  
   
-RT-AC87U: `wget https://downloads.openwrt.org/releases/19.07.2/targets/bcm53xx/generic/config.buildinfo -O .config`   
-EW1200: `wget https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt7621/config.buildinfo -O .config`   
-GL-MT300n-V2: `https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt76x8/config.buildinfo -O .config`   
+#### # Get configuration from release build:  
+```
+RT-AC87U: wget https://downloads.openwrt.org/releases/19.07.2/targets/bcm53xx/generic/config.buildinfo -O .config
+EW1200: wget https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt7621/config.buildinfo -O .config
+GL-MT300n-V2: https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt76x8/config.buildinfo -O .config
+```
    
 #### # Update & install packages:  
 ```
