@@ -1,3 +1,4 @@
+#### ---------------------------------------------------------------------------------------------------------  
 #### # Get source and checkout
 ```
 ###  get source and checkout  
@@ -10,15 +11,15 @@ make prereq
 git pull
 ```
 
-#### [RT-AC87U]
-`wget https://downloads.openwrt.org/releases/19.07.2/targets/bcm53xx/generic/config.buildinfo -O .config`
+#### ---------------------------------------------------------------------------------------------------------  
+  
+#### [RT-AC87U] `wget https://downloads.openwrt.org/releases/19.07.2/targets/bcm53xx/generic/config.buildinfo -O .config`
 
-#### [EW1200]
-`wget https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt7621/config.buildinfo -O .config`
+#### [EW1200] `wget https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt7621/config.buildinfo -O .config`
 
-#### [GL-MT300n-V2]
-`https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt76x8/config.buildinfo -O .config`
+#### [GL-MT300n-V2] `https://downloads.openwrt.org/releases/19.07.2/targets/ramips/mt76x8/config.buildinfo -O .config`
 
+#### ---------------------------------------------------------------------------------------------------------  
 #### # Update & install packages
 ```
 ./scripts/feeds update -a
@@ -51,7 +52,8 @@ make V=s 2>&1 | tee build.log
 Clean: `make clean`  
 Dirclean: `make dirclean`  
 Distclean: `make distclean`  
-
+  
+#### ---------------------------------------------------------------------------------------------------------  
 #### # Test builds in qemu
 ```
 ./scripts/feeds install -p extra qemu-userspace
