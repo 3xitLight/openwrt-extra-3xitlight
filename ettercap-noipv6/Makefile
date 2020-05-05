@@ -7,7 +7,7 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=ettercap
+PKG_NAME:=ettercap-noipv6
 PKG_VERSION:=0.8.3
 PKG_RELEASE:=1
 
@@ -15,15 +15,15 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/Ettercap/ettercap/releases/download/v$(PKG_VERSION)/
 PKG_HASH:=0a5caa838928467619aacaa0009e46567b8c87314e89dd724b5ddfd948bc42e3
 PKG_LICENSE:=GPL-3.0
-CMAKE_OPTIONS:=-DENABLE_GTK=Off -DINSTALL_DESKTOP=Off -DENABLE_LUA=On -DENABLE_TESTS=On -DENABLE_GEOIP=Off -DENABLE_PDF_DOCS=Off -DENABLE_IPV6=on -DBUNDLED_LIBS=Off -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_CROSSCOMPILING=True
+CMAKE_OPTIONS:=-DENABLE_GTK=Off -DINSTALL_DESKTOP=Off -DENABLE_LUA=On -DENABLE_TESTS=On -DENABLE_GEOIP=Off -DENABLE_PDF_DOCS=Off -DENABLE_IPV6=off -DBUNDLED_LIBS=Off -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_CROSSCOMPILING=True
 
 include $(INCLUDE_DIR)/package.mk
 # include $(INCLUDE_DIR)/cmake.mk
 
-define Package/ettercap
+define Package/ettercap-noipv6
   SECTION:=3xitlight
   CATEGORY:=3xitlight
-  TITLE:=a suite for man in the middle attacks.
+  TITLE:=a suite for man in the middle attacks, NoIPv6 support.
   URL:=https://www.ettercap-project.org
   MAINTAINER:=3xitlight <3xitlight@gmail.com>
   DEPENDS:=+check +luajit +libc +libstdcpp +uclibcxx +libgcc +uclibcxx +libpcre +libncurses +libpcrecpp +libltdl +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl +libcurl
@@ -63,7 +63,7 @@ define Build/Compile
 	$(STRIP) $(PKG_BUILD_DIR)/build/utils/etterlog
 endef
 
-define Package/ettercap/install
+define Package/ettercap-noipv6/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/ettercap $(1)/usr/bin/ettercap
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/utils/etterfilter $(1)/usr/bin/etterfilter
@@ -150,4 +150,4 @@ define Package/ettercap/install
 endef
 
 
-$(eval $(call BuildPackage,ettercap))
+$(eval $(call BuildPackage,ettercap-noipv6))
