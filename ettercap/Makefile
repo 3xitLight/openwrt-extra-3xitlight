@@ -1,55 +1,60 @@
+#
+# Copyright (C) 2006-2016 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ettercap
 PKG_VERSION:=0.8.3
 PKG_RELEASE:=1
-PKG_LICENSE:=GPL-3.0-or-later
-PKG_MAINTAINER:=3XITLiGHT <3xitlight@gmail.com>
 
-PKG_SOURCE_URL:=https://github.com/Ettercap/ettercap/releases/download/v$(PKG_VERSION)/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/Ettercap/ettercap/releases/download/v$(PKG_VERSION)/
 PKG_HASH:=0a5caa838928467619aacaa0009e46567b8c87314e89dd724b5ddfd948bc42e3
-PKGARCH:=all
+PKG_LICENSE:=GPL-3.0
 CMAKE_OPTIONS:=-D ENABLE_GTK=Off -D INSTALL_DESKTOP=Off -D ENABLE_LUA=Off -D ENABLE_TESTS=Off -D ENABLE_GEOIP=Off -D ENABLE_PDF_DOCS=Off
+# DEPENDS:=+libc +libstdcpp +uclibcxx +libgcc +uclibcxx +libpcre +libncurses +libpcrecpp +libssp +libltdl +libbsd +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl +libcurl
 
 include $(INCLUDE_DIR)/package.mk
+# include $(INCLUDE_DIR)/cmake.mk
 
 define Package/ettercap
   SECTION:=3xitlight
   CATEGORY:=3xitlight
   TITLE:=a suite for man in the middle attacks.
   URL:=https://www.ettercap-project.org
-  DEPENDS:=+libc +libstdcpp +uclibcxx +libgcc +uclibcxx +libpcre +libncurses +libpcrecpp +libssp +libltdl +libbsd +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl
-endef
-
-define Package/ettercap/description
-	a suite for man in the middle attacks.
+  MAINTAINER:=3xitlight <3xitlight@gmail.com>
+  DEPENDS:=+libc +libstdcpp +uclibcxx +libgcc +uclibcxx +libpcre +libncurses +libpcrecpp +libssp +libltdl +libbsd +libpcap +libnet-1.2.x +libopenssl +libpthread +zlib +zlib-dev +curl +libcurl
 endef
 
 define Build/Prepare
-	mkdir -p $(PKG_BUILD_DIR) \
-	$(CP) $(DL_DIR)/$(PKG_SOURCE) $(PKG_BUILD_DIR) \
+	mkdir -p $(PKG_BUILD_DIR)
+	$(CP) $(DL_DIR)/$(PKG_SOURCE) $(PKG_BUILD_DIR)
 	$(PKG_UNPACK)
+	mkdir -p $(PKG_BUILD_DIR)/build
+	mkdir -p $(PKG_BUILD_DIR)/ipkg-install
 endef
 
 define Build/Configure
-    IN_OPENWRT=1 \
-    AR="$(TARGET_CROSS)ar" \
-    AS="$(TARGET_CC) -c $(TARGET_CFLAGS)" \
-    LD="$(TARGET_CROSS)ld" \
-    NM="$(TARGET_CROSS)nm" \
-    CC="$(TARGET_CC)" \
-    GCC="$(TARGET_CC)" \
-    CXX="$(TARGET_CROSS)g++" \
-    RANLIB="$(TARGET_CROSS)ranlib" \
-    STRIP="$(TARGET_CROSS)strip" \
-    OBJCOPY="$(TARGET_CROSS)objcopy" \
-    OBJDUMP="$(TARGET_CROSS)objdump" \
-    TARGET_CPPFLAGS="$(TARGET_CPPFLAGS)" \
-    TARGET_CFLAGS="$(TARGET_CFLAGS)" \
-    TARGET_LDFLAGS="$(TARGET_LDFLAGS)" \
-    cmake -S $(PKG_BUILD_DIR) -B $(PKG_BUILD_DIR)/build $(CMAKE_OPTIONS)
-    #cmake $(PKG_BUILD_DIR)/CMakeLists.txt
+  IN_OPENWRT=1 \
+  AR="$(TARGET_CROSS)ar" \
+  AS="$(TARGET_CC) -c $(TARGET_CFLAGS)" \
+  LD="$(TARGET_CROSS)ld" \
+  NM="$(TARGET_CROSS)nm" \
+  CC="$(TARGET_CC)" \
+  GCC="$(TARGET_CC)" \
+  CXX="$(TARGET_CROSS)g++" \
+  RANLIB="$(TARGET_CROSS)ranlib" \
+  STRIP="$(TARGET_CROSS)strip" \
+  OBJCOPY="$(TARGET_CROSS)objcopy" \
+  OBJDUMP="$(TARGET_CROSS)objdump" \
+  TARGET_CPPFLAGS="$(TARGET_CPPFLAGS)" \
+  TARGET_CFLAGS="$(TARGET_CFLAGS)" \
+  TARGET_LDFLAGS="$(TARGET_LDFLAGS)" \
+  cmake -S $(PKG_BUILD_DIR) -B $(PKG_BUILD_DIR)/build $(CMAKE_OPTIONS)
 endef
 
 define Build/Compile
@@ -61,6 +66,7 @@ endef
 
 define Package/ettercap/install
 	$(INSTALL_DIR) $(1)/usr/bin
+# $(CP) $(PKG_BUILD_DIR)/$(PKG_NAME) $(1)/bin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/ettercap $(1)/usr/bin/ettercap
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/libettercap.so.0.8.2 $(1)/usr/bin/libettercap.so
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/src/libettercap.so.0.8.2 $(1)/usr/bin/libettercap.so.0
@@ -140,5 +146,6 @@ define Package/ettercap/install
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/build/man/etterfilter.8 $(1)/usr/share/man/man8/etterfilter.8
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/build/man/etterlog.8 $(1)/usr/share/man/man8/etterlog.8
 endef
+
 
 $(eval $(call BuildPackage,ettercap))

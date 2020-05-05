@@ -3,3 +3,4 @@ src-git openwrt-useful-tools https://github.com/adde88/openwrt-useful-tools.git
 src-git stangri https://github.com/stangri/openwrt-repo.git
 src-git hcxtools https://github.com/adde88/hcxtools-hcxdumptool-openwrt.git
 src-git openwrt_extra https://github.com/Andy2244/openwrt-extra
+src-git openwrt_node_packages https://github.com/nxhack/openwrt-node-packages.git
