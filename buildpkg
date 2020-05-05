@@ -1,0 +1,235 @@
+#!/bin/bash
+
+##############################
+##     SET ENVIRONMENT     ##
+##############################
+
+REPO="3xitlight"
+PKG="ettercap"
+BUILD_DIR="/home/xnn/Desktop/dev/openwrtbuild/openwrt_19.02"
+#
+DEPENDENCY_1="curl"
+DEPENDENCY_2="libstdcpp"
+DEPENDENCY_3="libpcap"
+DEPENDENCY_4="libnet-1.2.x"
+DEPENDENCY_5="libopenssl"
+DEPENDENCY_6="libpthread"
+DEPENDENCY_7="zlib"
+DEPENDENCY_8="libncurses"
+DEPENDENCY_9="libpcre"
+DEPENDENCY_10="libltdl"
+CURRENT_DIR="${PWD}"
+CORES="8"
+
+
+## if no CPU number given, use all.
+if [ -z "$NUM_CPUS" ]; then
+	NUM_CPUS=`grep -c ^processor /proc/cpuinfo`
+fi
+	
+#if [ -e "$BUILD_DIR" ]; then
+#	cd ${BUILD_DIR}
+#fi
+	
+#function current_dir () {
+#	CURRENT_DIR="${PWD}"
+#}
+		
+#######################
+##     FUNCTIONS     ##
+#######################
+
+function update_install_all () {
+# fist time build
+	echo
+	echo ""
+	echo
+	./scripts/feeds update -a 
+	./scripts/feeds install -a 
+}
+
+
+function download_package_source () {
+# fist time build
+	echo
+	echo ""
+	echo
+	${BUILD_DIR}/make download ${PKG}
+}
+
+
+function update_install_customrepo () {
+	echo
+	echo ""
+	echo
+	./scripts/feeds update ${REPO}
+	./scripts/feeds install -p ${PKG}
+}
+
+
+function install_build_tools () {
+	echo
+	echo ""
+	echo
+	make tools/install -j${CORES}
+	make toolchain/install -j${CORES}
+
+}
+
+
+function build_package () {
+	echo
+	echo ""
+	echo
+	make package/${PKG}/compile -j1 V=s 
+	make package/${PKG}/install -j1 V=s
+	make package/index
+}
+
+
+function rebuild_package () {
+	echo
+	echo ""
+	echo
+	make package/PKG/{clean,compile,install} V=s
+}
+
+
+function build_deps () {
+
+	if [ -n "$DEPENDENCY_1" ]; then
+	echo
+	echo "###   make ${DEPENDENCY_1}"
+	echo
+	make package/${DEPENDENCY_1}/compile -j1 V=s 
+	make package/${DEPENDENCY_1}/install -j1 V=s
+	fi
+	
+	if [ -n "$DEPENDENCY_2" ]; then
+	echo
+	echo "###   make ${DEPENDENCY_2}"
+	echo
+	make package/${DEPENDENCY_2}/compile -j1 V=s 
+	make package/${DEPENDENCY_2}/install -j1 V=s
+	fi
+	
+	if [ -n "$DEPENDENCY_3" ]; then
+	echo
+	echo "###   make ${DEPENDENCY_3}"
+	echo
+	make package/${DEPENDENCY_3}/compile -j1 V=s 
+	make package/${DEPENDENCY_3}/install -j1 V=s
+	fi
+
+	if [ -n "$DEPENDENCY_4" ]; then
+	echo
+	echo "###   make ${DEPENDENCY_4}"
+	echo
+	make package/${DEPENDENCY_4}/compile -j1 V=s 
+	make package/${DEPENDENCY_4}/install -j1 V=s
+	fi
+	
+	if [ -n "$DEPENDENCY_5" ]; then
+	echo
+	echo "###   make ${DEPENDENCY_5}"
+	echo
+	make package/${DEPENDENCY_5}/compile -j1 V=s 
+	make package/${DEPENDENCY_5}/install -j1 V=s
+	fi
+	
+	if [ -n "$DEPENDENCY_6" ]; then
+	echo
+	echo "###   make ${DEPENDENCY_6}"
+	echo
+	make package/${DEPENDENCY_6}/compile -j1 V=s 
+	make package/${DEPENDENCY_6}/install -j1 V=s
+	fi
+	
+	if [ -n "$DEPENDENCY_7" ]; then
+	echo
+	echo "###   make ${DEPENDENCY_7}"
+	echo
+	make package/${DEPENDENCY_7}/compile -j1 V=s 
+	make package/${DEPENDENCY_7}/install -j1 V=s
+	fi
+	
+	if [ -n "$DEPENDENCY_8" ]; then
+	echo
+	echo "###   make ${DEPENDENCY_8}"
+	echo
+	make package/${DEPENDENCY_8}/compile -j1 V=s 
+	make package/${DEPENDENCY_8}/install -j1 V=s
+	fi
+}
+
+
+function display_help() {
+	echo
+    echo "	======================================================================"
+#	echo "	======================================================================"
+	echo ""
+    echo "		"1" - build package"
+    echo "		"2" - rebuild package"
+    echo "		"
+    echo "		"3" - update & install all repo's/packages"
+	echo "		"4" - update & install custom repo & build package"
+	echo "		"
+	echo "		"5" - install build tools and toolchain"
+    echo "		"6" - download the package source"
+	echo "		"7" - build dependencies"
+	echo		
+	echo "		current directory: ${CURRENT_DIR}"
+	echo "		$ buildpkg [-command]"
+	echo "		              "
+#	echo "	======================================================================"
+	echo "	======================================================================"
+}
+
+function show_greeter(){
+	echo ""
+	echo
+	echo
+	echo " ${bldred}     xNN's "
+	echo " ${bldylw}	 ____  __.                         .__ ___.         .__.__       .__	"
+	echo " ${bldylw}	|    |/ _|___________  ____   ____ |  |\_ |__  __ __|__|  |    __| _	"
+	echo " ${bldylw}	|      <_/ __ \_  __ \/    \_/ __ \|  | | __ \|  |  \  |  |   / __ |	"
+	echo " ${bldylw}	|    |  \  ___/|  | \/   |  \  ___/|  |_| \_\ \  |  /  |  |__/ /_/ |	"
+	echo " ${bldylw}	|____|__ \___  >__|  |___|  /\___  >____/___  /____/|__|____/\____ |	"
+	echo " ${bldylw}	        \/   \/           \/     \/         \/                    \/	"
+}
+
+case "$1" in
+
+	1)
+		build_package
+;;
+	2)
+		rebuild_package
+;;
+	3)
+		update_install_all
+;;
+	4)
+		update_install_customrepo
+;;
+	5)
+		install_build_tools
+;;
+	6)
+		download_package_source
+;;
+	7)
+		build_deps
+;;
+	-h)
+		show_greeter
+		display_help
+;;
+	--help)
+		show_greeter
+		display_help
+;;
+
+esac
+
+cd ${CURRENT_DIR}

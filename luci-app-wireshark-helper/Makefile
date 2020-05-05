@@ -5,15 +5,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_MAINTAINER:=Stan Grishin <stangri@melmac.net>
-
 LUCI_TITLE:=Wireshark-helper Web UI
 LUCI_DESCRIPTION:=Provides Web UI for Wireshark-helper.
 LUCI_DEPENDS:=+luci-compat +luci-mod-admin-full +wireshark-helper
 LUCI_PKGARCH:=all
 PKG_RELEASE:=6
-SECTION:=3xitlight
-CATEGORY:=3xitlight
-    
+ 
 include ../../luci.mk
-
 # call BuildPackage - OpenWrt buildroot signature

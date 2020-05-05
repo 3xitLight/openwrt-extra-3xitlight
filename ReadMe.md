@@ -42,11 +42,11 @@ Distclean: `make distclean`
 PACKAGE="<PACKAGE>"
 echo ${PACKAGE}
 
-make package/${PACKAGE}/download V=s
-make package/${PACKAGE}/check V=s
-make package/${PACKAGE}/compile V=s
-make package/${PACKAGE}/install V=s
-make package/${PACKAGE}/{clean,compile,install} V=s
+make package/${PACKAGE}/download -j1 V=s
+make package/${PACKAGE}/check -j1 V=s
+make package/${PACKAGE}/compile -j1 V=s
+make package/${PACKAGE}/install -j1 V=s
+make package/${PACKAGE}/{clean,compile,install} -j1 V=s
 ```
   
   

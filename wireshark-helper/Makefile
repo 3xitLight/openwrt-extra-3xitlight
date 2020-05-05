@@ -12,11 +12,11 @@ PKG_MAINTAINER:=Stan Grishin <stangri@melmac.net>
 include $(INCLUDE_DIR)/package.mk
 
 define Package/wireshark-helper
-	SECTION:=3xitlight
-	CATEGORY:=3xitlight
-	DEPENDS:=+iptables-mod-tee
-	TITLE:=wireshark-helper Service
-	PKGARCH:=all
+    SECTION:=3xitlight
+    CATEGORY:=3xitlight
+    DEPENDS:=+iptables-mod-tee
+    TITLE:=wireshark-helper Service
+    PKGARCH:=all
 endef
 
 define Package/wireshark-helper/description
