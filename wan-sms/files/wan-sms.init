@@ -1,0 +1,22 @@
+#!/bin/sh /etc/rc.common
+
+# /etc/init.d/wan-sms
+
+START=99
+STOP=99
+BIN="/usr/sbin/wan-sms"
+
+SERVICE_DAEMONIZE=1
+SERVICE_WRITE_PID=1
+
+start() {
+        service_start $BIN
+}
+
+stop() {
+        service_stop $BIN
+}
+
+reload() {
+        service_reload $BIN
+}

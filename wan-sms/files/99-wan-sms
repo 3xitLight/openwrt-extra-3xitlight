@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ "$ACTION" = "ifup" -a "$INTERFACE" = "wan" ] && {
+/usr/bin/sms-up.sh
+/usr/bin/env > /tmp/envs_log.log
+}
+
+[ "$ACTION" = "ifdown" -a "$INTERFACE" = "wan" ] && {
+/usr/bin/sms-down.sh
+/usr/bin/env > /tmp/envs_log.log
+}
